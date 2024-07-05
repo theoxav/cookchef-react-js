@@ -12,16 +12,40 @@ export default function Content() {
   const BASE_URL_API = useContext(ApiContext);
   const [[recipes, setRecipes], isLoading] = useFetchData(BASE_URL_API, page);
 
-  function updateRecipe(updatedRecipe) {
-    setRecipes(
-      recipes.map((recipe) =>
-        recipe._id === updatedRecipe._id ? updatedRecipe : recipe
-      )
-    );
+  async function updateRecipe(updatedRecipe) {
+    try {
+      const { _id, ...restRecipe } = updatedRecipe;
+      const response = await fetch(`${BASE_URL_API}/${_id}`, {
+        method: "PATCH",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(restRecipe),
+      });
+      if (response.ok) {
+        const updatedRecipe = await response.json();
+        setRecipes(
+          recipes.map((recipe) =>
+            recipe._id === updatedRecipe._id ? updatedRecipe : recipe
+          )
+        );
+      }
+    } catch (e) {
+      console.error("Erreur maj recette", e);
+    }
   }
 
-  function deleteRecipe(_id) {
-    setRecipes(recipes.filter((r) => r._id !== _id));
+  async function deleteRecipe(_id) {
+    try {
+      const response = await fetch(`${BASE_URL_API}/${_id}`, {
+        method: "DELETE",
+      });
+      if (response.ok) {
+        setRecipes(recipes.filter((r) => r._id !== _id));
+      }
+    } catch (e) {
+      console.error("Erreur suppression recette", e);
+    }
   }
 
   return (
@@ -45,7 +69,7 @@ export default function Content() {
                 <Recipe
                   key={r._id}
                   recipe={r}
-                  toggleLikedRecipe={updateRecipe}
+                  updateRecipe={updateRecipe}
                   deleteRecipe={deleteRecipe}
                 />
               ))}

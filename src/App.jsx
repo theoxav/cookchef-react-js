@@ -1,7 +1,7 @@
 import styles from "./App.module.scss";
 import Footer from "./components/Footer/Footer";
 import Header from "./components/Header/Header";
-import { seedRecipes } from "./data/seed";
+//import { seedRecipes } from "./data/seed";
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 
