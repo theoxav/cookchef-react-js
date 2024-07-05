@@ -8,6 +8,7 @@ export default function Content() {
   const [recipes, setRecipes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [filter, setFilter] = useState("");
+  const [page, setPage] = useState(1);
   const BASE_URL_API = useContext(ApiContext);
 
   useEffect(() => {
@@ -17,8 +18,12 @@ export default function Content() {
         setIsLoading(true);
         const response = await fetch(BASE_URL_API);
         if (response.ok && !cancel) {
-          const recipes = await response.json();
-          setRecipes(Array.isArray(recipes) ? recipes : [recipes]);
+          const newRecipes = await response.json();
+          setRecipes((x) =>
+            Array.isArray(newRecipes)
+              ? [...x, ...newRecipes]
+              : [...x, newRecipes]
+          );
         }
       } catch (e) {
         console.log("Error");
@@ -30,7 +35,7 @@ export default function Content() {
     }
     fetchRecipes();
     return () => (cancel = true);
-  }, [BASE_URL_API]);
+  }, [BASE_URL_API, page]);
 
   function handleInput(e) {
     const filter = e.target.value;
@@ -75,6 +80,11 @@ export default function Content() {
               ))}
           </div>
         )}
+        <div className="d-flex flex-row justify-content-center align-items-center p-20">
+          <button onClick={() => setPage(page + 1)} className="btn btn-primary">
+            Charger plus de recettes
+          </button>
+        </div>
       </div>
     </div>
   );
