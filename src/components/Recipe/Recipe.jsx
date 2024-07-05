@@ -1,6 +1,6 @@
 import styles from "./Recipe.module.scss";
 
-function Recipe({ recipe, updateRecipe, deleteRecipe }) {
+const Recipe = ({ recipe, updateRecipe, deleteRecipe }) => {
   async function handleClickLike() {
     updateRecipe({ ...recipe, liked: !recipe.liked });
   }
@@ -26,6 +26,6 @@ function Recipe({ recipe, updateRecipe, deleteRecipe }) {
       </div>
     </div>
   );
-}
+};
 
 export default Recipe;

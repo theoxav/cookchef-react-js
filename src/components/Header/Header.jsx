@@ -4,7 +4,7 @@ import { useState } from "react";
 import HeaderMenu from "./components/HeaderMenu/HeaderMenu";
 import { NavLink } from "react-router-dom";
 
-function Header() {
+const Header = () => {
   const [showMenu, setShowMenu] = useState(false);
 
   return (
@@ -36,6 +36,6 @@ function Header() {
       )}
     </header>
   );
-}
+};
 
 export default Header;

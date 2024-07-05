@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
 import styles from "./AdminNav.module.scss";
 
-function AdminNav() {
+const AdminNav = () => {
   return (
     <ul className={`${styles.list} d-flex flex-column`}>
       <NavLink
@@ -18,6 +18,6 @@ function AdminNav() {
       </NavLink>
     </ul>
   );
-}
+};
 
 export default AdminNav;

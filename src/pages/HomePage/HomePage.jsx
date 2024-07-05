@@ -7,7 +7,7 @@ import Search from "../../components/Search/Search";
 import { useFetchRecipes } from "../../hooks";
 import { updateRecipe as updateR, deleteRecipe as deleteR } from "../../apis";
 
-export default function Content() {
+const HomePage = () => {
   const [filter, setFilter] = useState("");
   const [page, setPage] = useState(1);
   const BASE_URL_API = useContext(ApiContext);
@@ -63,4 +63,6 @@ export default function Content() {
       </div>
     </div>
   );
-}
+};
+
+export default HomePage;

@@ -2,7 +2,7 @@ import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
 import AdminNav from "../../components/Admin/AdminNav/AdminNav";
 
-function Admin() {
+const AdminPage = () => {
   return (
     <div className="d-flex flex-fill p-20">
       <AdminNav />
@@ -13,6 +13,6 @@ function Admin() {
       </div>
     </div>
   );
-}
+};
 
-export default Admin;
+export default AdminPage;
