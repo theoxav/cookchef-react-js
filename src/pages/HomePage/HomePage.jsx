@@ -5,6 +5,7 @@ import Loading from "../../components/Loading/Loading";
 import { ApiContext } from "../../context/ApiContext";
 import Search from "../../components/Search/Search";
 import { useFetchRecipes } from "../../hooks";
+import { updateRecipe as updateR, deleteRecipe as deleteR } from "../../apis";
 
 export default function Content() {
   const [filter, setFilter] = useState("");
@@ -16,39 +17,15 @@ export default function Content() {
   );
 
   async function updateRecipe(updatedRecipe) {
-    try {
-      const { _id, ...restRecipe } = updatedRecipe;
-      const response = await fetch(`${BASE_URL_API}/${_id}`, {
-        method: "PATCH",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(restRecipe),
-      });
-      if (response.ok) {
-        const updatedRecipe = await response.json();
-        setRecipes(
-          recipes.map((recipe) =>
-            recipe._id === updatedRecipe._id ? updatedRecipe : recipe
-          )
-        );
-      }
-    } catch (e) {
-      console.error("Erreur maj recette", e);
-    }
+    const savedRecipe = await updateR(updatedRecipe);
+    setRecipes(
+      recipes.map((r) => (r._id === savedRecipe._id ? savedRecipe : r))
+    );
   }
 
   async function deleteRecipe(_id) {
-    try {
-      const response = await fetch(`${BASE_URL_API}/${_id}`, {
-        method: "DELETE",
-      });
-      if (response.ok) {
-        setRecipes(recipes.filter((r) => r._id !== _id));
-      }
-    } catch (e) {
-      console.error("Erreur suppression recette", e);
-    }
+    await deleteR(_id);
+    setRecipes(recipes.filter((r) => r._id !== _id));
   }
 
   return (
