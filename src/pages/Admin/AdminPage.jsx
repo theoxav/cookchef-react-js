@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
-import AdminNav from "../../components/Admin/AdminNav/AdminNav";
+import AdminNav from "../../components/Admin/NavBar/AdminNav";
 
 const AdminPage = () => {
   return (

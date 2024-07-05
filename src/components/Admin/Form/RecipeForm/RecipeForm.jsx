@@ -1,13 +1,10 @@
-import { useContext } from "react";
 import styles from "./RecipeForm.module.scss";
 import * as yup from "yup";
-import { ApiContext } from "../../../context/ApiContext";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { createRecipe } from "../../../../apis";
 
 const RecipeForm = () => {
-  const BASE_URL = useContext(ApiContext);
-
   const defaultValues = {
     title: "",
     image: "",
@@ -40,21 +37,8 @@ const RecipeForm = () => {
   async function submit(values) {
     try {
       clearErrors();
-      const response = await fetch(BASE_URL, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(values),
-      });
-      if (response.ok) {
-        reset(defaultValues);
-      } else {
-        setError("generic", {
-          type: "generic",
-          message: "Une erreur est survenue",
-        });
-      }
+      await createRecipe(values);
+      reset(defaultValues);
     } catch (e) {
       setError("generic", {
         type: "generic",

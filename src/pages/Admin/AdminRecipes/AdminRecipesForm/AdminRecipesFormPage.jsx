@@ -1,4 +1,4 @@
-import RecipeForm from "../../../../components/Form/RecipeForm/RecipeForm";
+import RecipeForm from "../../../../components/Admin/Form/RecipeForm/RecipeForm";
 
 const AdminRecipesFormPage = () => {
   return <RecipeForm />;

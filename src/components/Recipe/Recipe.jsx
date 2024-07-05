@@ -1,18 +1,12 @@
 import styles from "./Recipe.module.scss";
 
-const Recipe = ({ recipe, updateRecipe, deleteRecipe }) => {
+const Recipe = ({ recipe, updateRecipe }) => {
   async function handleClickLike() {
     updateRecipe({ ...recipe, liked: !recipe.liked });
   }
 
-  async function handleClickDelete(e) {
-    e.stopPropagation();
-    deleteRecipe(recipe._id);
-  }
-
   return (
     <div onClick={handleClickLike} className={styles.recipe}>
-      <i onClick={handleClickDelete} className="fa-solid fa-xmark"></i>
       <div className={styles.imageContainer}>
         <img src={recipe.image} alt={recipe.title} />
       </div>

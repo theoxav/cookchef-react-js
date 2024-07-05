@@ -1,7 +1,7 @@
 import { NavLink } from "react-router-dom";
-import styles from "./AdminRecipesNav.module.scss";
+import styles from "./RecipesNav.module.scss";
 
-const AdminRecipesNav = () => {
+const RecipesNav = () => {
   return (
     <ul className={styles.list}>
       <NavLink
@@ -20,4 +20,4 @@ const AdminRecipesNav = () => {
   );
 };
 
-export default AdminRecipesNav;
+export default RecipesNav;

@@ -1,6 +1,6 @@
 import { Suspense } from "react";
 import { Outlet } from "react-router-dom";
-import AdminRecipesNav from "../../../components/Admin/AdminRecipesNav/AdminRecipesNav";
+import AdminRecipesNav from "../../../components/Admin/RecipesNav/RecipesNav";
 
 const AdminRecipes = () => {
   return (
