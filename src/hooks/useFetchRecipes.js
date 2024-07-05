@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { getRecipes } from "../apis";
 
-export function useFetchRecipes(url, page) {
+export function useFetchRecipes(page) {
   const [recipes, setRecipes] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState([]);
@@ -31,7 +31,7 @@ export function useFetchRecipes(url, page) {
     }
     fetchRecipes();
     return () => (cancel = true);
-  }, [url, page]);
+  }, [page]);
 
   return [[recipes, setRecipes], isLoading, error];
 }

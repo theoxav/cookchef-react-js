@@ -2,6 +2,7 @@ import { lazy, Suspense } from "react";
 import { createBrowserRouter, redirect } from "react-router-dom";
 import App from "./App";
 import Loading from "./components/Loading/Loading";
+import { getRecipe } from "./apis";
 
 // Lazy loaded components
 const HomePage = lazy(() => import("./pages/HomePage/HomePage"));
@@ -77,6 +78,7 @@ export const router = createBrowserRouter([
                     <AdminRecipesFormPage />
                   </Suspense>
                 ),
+                loader: async ({ params: { recipeId } }) => getRecipe(recipeId),
               },
               {
                 index: true,
